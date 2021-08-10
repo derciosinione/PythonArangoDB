@@ -13,6 +13,10 @@ else:
   db = cnx['school']
   print('open new connection', db)
   
-studentsCollection = db.createCollection(name='Students')
+# studentsCollection = db.createCollection(name='Students')
+studentCll = db['Students']
+doc1 = studentCll.createDocument({'name': 'dercio derone', 'email': 'dercio@gmail.com'})
+# doc1['name'] = 'Dercio Derone'
+# doc1['email'] = 'derciosinione@gmail.com'
 
-db['Students']
+print(doc1)
