@@ -3,7 +3,7 @@ from typing import Any
 import pyArango.connection as adb
 
 
-class Arango:
+class DsArango:
   def __init__(self) -> None:
     self.cnx = adb.Connection(arangoURL='http://172.16.16.36:8529/',username='root', password='snirdb@2021')
     self.db = None
