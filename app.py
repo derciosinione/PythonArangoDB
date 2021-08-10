@@ -2,10 +2,11 @@ from os import name
 from typing import Any
 import pyArango.connection as adb
 
+# self.cnx = adb.Connection(arangoURL='http://172.16.16.36:8529/',username='root', password='snirdb@2021')
 
-class DsArango:
-  def __init__(self) -> None:
-    self.cnx = adb.Connection(arangoURL='http://172.16.16.36:8529/',username='root', password='snirdb@2021')
+class DsArango(object):
+  def __init__(self, dbUrl, username, password) -> None:
+    self.cnx = adb.Connection(arangoURL=dbUrl,username=username, password=password)
     self.db = None
 
   def getDB(self, name) -> bool:
@@ -31,3 +32,5 @@ class DsArango:
 
 # getDB('school')
 # insertStudent()
+
+db = DsArango()
