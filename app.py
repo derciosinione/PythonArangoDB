@@ -31,7 +31,6 @@ class DsArango(object):
     # doc1['email'] = 'derciosinione@gmail.com'
     return True
 
-# getDB('school')
-# insertStudent()
 
-db = DsArango(dbUrl='http://172.16.16.36:8529/', username='root', password='snirdb@2021')
+db = DsArango(dbUrl='http://172.16.16.36:8529/', username='root', password='snirdb@2021', dbname='school')
+print(db)
