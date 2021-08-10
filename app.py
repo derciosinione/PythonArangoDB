@@ -1,3 +1,4 @@
+from os import name
 import pyArango.connection as adb
 
 
@@ -11,3 +12,7 @@ if not cnx.hasDatabase(name='school'):
 else:
   db = cnx['school']
   print('open new connection', db)
+  
+studentsCollection = db.createCollection(name='Students')
+
+db['Students']
