@@ -9,6 +9,7 @@ class DsArango(object):
     self.cnx = adb.Connection(arangoURL=dbUrl,username=username, password=password)
     self.db = None
     self.getDB(dbname)
+    
 
   def getDB(self, dbname) -> bool:
     if not self.cnx.hasDatabase(name=dbname):
@@ -20,17 +21,22 @@ class DsArango(object):
       self.db = self.cnx[dbname]
     return True
 
-  def insertStudent(self) -> bool:
+  def insertStudent(self, dbCollection) -> bool:
     # studentsCollection = db.createCollection(name='Students')
-    studentCll = self.db['Students']
-    doc1 = studentCll.createDocument({'name': 'Dercio Derone', 'email': 'dercio@gmail.com'})
-    doc2 = studentCll.createDocument({'name': 'Paulo Lopes', 'email': 'paulo@gmail.com'})
-    doc3 = studentCll.createDocument({'name': 'Anderson Francisco', 'email': 'anderson@gmail.com'})
+    dbCollection = self.db['Students']
+    doc1 = dbCollection.createDocument({'name': 'Dercio Derone', 'email': 'dercio@gmail.com'})
+    doc2 = dbCollection.createDocument({'name': 'Paulo Lopes', 'email': 'paulo@gmail.com'})
+    doc3 = dbCollection.createDocument({'name': 'Anderson Francisco', 'email': 'anderson@gmail.com'})
     doc1.save(); doc2.save(); doc3.save()
     # doc1['name'] = 'Dercio Derone'
     # doc1['email'] = 'derciosinione@gmail.com'
     return True
-
+  
+  def insertManyStudent(self) -> bool:
+    students = [('Elizandra', 'elizandra@gmail.com'), ('Angelica', 'angelica@gmail.com'),
+                ('Eduana', 'eduana@gmail.com'), ('Sinione', 'sinione@gmail.com')]
+    for (name, email) in students:
+      doc = self.db
 
 db = DsArango(dbUrl='http://172.16.16.36:8529/', username='root', password='snirdb@2021', dbname='school')
 print(db.insertStudent())
