@@ -5,18 +5,19 @@ import pyArango.connection as adb
 # self.cnx = adb.Connection(arangoURL='http://172.16.16.36:8529/',username='root', password='snirdb@2021')
 
 class DsArango(object):
-  def __init__(self, dbUrl, username, password) -> None:
+  def __init__(self, dbUrl, username, password, dbname) -> None:
     self.cnx = adb.Connection(arangoURL=dbUrl,username=username, password=password)
     self.db = None
+    self.getDB(dbname)
 
-  def getDB(self, name) -> bool:
-    if not self.cnx.hasDatabase(name=name):
+  def getDB(self, dbname) -> bool:
+    if not self.cnx.hasDatabase(name=dbname):
       op = input('This database does not exists, do you want to create? (Y/n)')
       if op == 'Y' or op == 'y':
-        db = self.cnx.createDatabase(name=name)
+        db = self.cnx.createDatabase(name=dbname)
       else: return False
     else:
-      db = self.cnx[name]
+      db = self.cnx[dbname]
     return True
 
   def insertStudent(self) -> bool:
@@ -33,4 +34,4 @@ class DsArango(object):
 # getDB('school')
 # insertStudent()
 
-db = DsArango()
+db = DsArango(dbUrl='http://172.16.16.36:8529/', username='root', password='snirdb@2021')
